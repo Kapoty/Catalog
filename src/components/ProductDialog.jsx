@@ -77,16 +77,18 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 const imgs = [];
 
 for (let i = 1; i<=6; i++)
-	imgs.push(`/assets/image/catalog/${i}.jpg`);
+	imgs.push(`./assets/image/catalog/${i}.jpg`);
 
 class ProductDialog extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {dialogOpen: false};
+		this.state = {dialogOpen: false, imageOpen: false, image: ''};
 		this.pageReg = /\/p\/[\w\-]+/;
 		this.handleDialogClose = this.handleDialogClose.bind(this);
 		this.handleAddToBag = this.handleAddToBag.bind(this);
+		this.openImage = this.openImage.bind(this);
+		this.closeImage = this.closeImage.bind(this);
 	}
 
 	handleDialogClose() {
@@ -96,6 +98,14 @@ class ProductDialog extends React.Component {
 	handleAddToBag() {
 		this.props.addToBag({});
 		this.props.history.push(this.props.lastPage);
+	}
+
+	openImage(img) {
+		this.setState({imageOpen: true, image: img});
+	}
+
+	closeImage() {
+		this.setState({imageOpen: false});
 	}
 
 	render() {
@@ -115,7 +125,7 @@ class ProductDialog extends React.Component {
 							<ImageList className={classes.imageList} cols={1} rowHeight={250}>
 								{imgs.map((img, i) => (
 									<ImageListItem key={i}>
-										<img src={img} alt={'title'} />
+										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
 									</ImageListItem>
 								))}
 							</ImageList>
@@ -124,7 +134,7 @@ class ProductDialog extends React.Component {
 							<ImageList className={classes.imageList} cols={2} rowHeight={300}>
 								{imgs.map((img, i) => (
 									<ImageListItem key={i}>
-										<img src={img} alt={'title'} />
+										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
 									</ImageListItem>
 								))}
 							</ImageList>
@@ -133,7 +143,7 @@ class ProductDialog extends React.Component {
 							<ImageList className={classes.imageList} cols={3} rowHeight={300}>
 								{imgs.map((img, i) => (
 									<ImageListItem key={i}>
-										<img src={img} alt={'title'} />
+										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
 									</ImageListItem>
 								))}
 							</ImageList>
@@ -193,6 +203,17 @@ class ProductDialog extends React.Component {
 						Adicionar à sacola
 					</Button>
 				</DialogActions>
+				</Dialog>
+				<Dialog fullScreen open={this.state.imageOpen} onClose={this.closeImage} TransitionComponent={Transition}>
+					<DialogTitle id="openImageDialog" onClose={this.closeImage}>
+					Visualizar Foto
+						<IconButton aria-label="close" className={classes.closeButton} onClick={this.closeImage}>
+							<CloseIcon />
+						</IconButton>
+					</DialogTitle>
+					<DialogContent dividers style={{display: 'flex', justifyContent: 'center'}}>
+						<img src={'./assets/image/catalog/1.jpg'} alt={'title'} style={{height: '100%'}} onClick={() => this.openImage(img)}/>
+					</DialogContent>
 				</Dialog>
 		</React.Fragment>
 	}

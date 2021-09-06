@@ -78,7 +78,7 @@ export default class MainRoute extends React.Component {
 					<Catalog history={this.props.history}/>
 				</div>
 				<div style={{display: (this.state.lastPage=='/sacola') ? 'block' : 'none'}}>
-					<Bag/>
+					<Bag history={this.props.history}/>
 				</div>
 				<BottomNav location={this.props.location} history={this.props.history}/>
 				<InternalPage location={this.props.location} history={this.props.history} lastPage={this.state.lastPage}/>

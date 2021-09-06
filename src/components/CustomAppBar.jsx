@@ -89,7 +89,7 @@ class CustomAppBar extends React.Component {
 							</ListItem>
 						</List>
 					</Drawer>
-					<img className={classes.logo} src='../assets/image/logo-small.png'/>
+					<img className={classes.logo} src='./assets/image/logo-small.png' onClick={() => this.props.history.push('/')}/>
 					<div className={classes.grow} />
 					<IconButton edge="end" color="inherit" aria-label="search" onClick={this.props.openFilter}>
 						<SearchIcon />

@@ -1,9 +1,10 @@
-- finalizar sacola e ir pro wpp
+- finalizar sacola e ir pro wpp [OK]
 - redes sociais e contato menu lateral
-- dar zoom imagem produto
+- dar zoom imagem produto [OK]
 
 - construir páginas menu lateral
 
+- popup inicial
 - popup cookies
 - popup adicionar tela inicial
 - notificações site
