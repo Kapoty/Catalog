@@ -63,7 +63,7 @@ const useStyles = (theme) => ({
 
 var itemData = [];
 	for (let i = 1; i<=5; i++)
-	itemData.push({img: `/assets/image/catalog/${i}.jpg`,
+	itemData.push({img: `./assets/image/catalog/${i}.jpg`,
 		price: i+10,
 		category: Math.round(Math.random()),
 		featured: Math.round(Math.random()),
