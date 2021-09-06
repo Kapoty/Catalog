@@ -1,0 +1,9 @@
+- finalizar sacola e ir pro wpp
+- redes sociais e contato menu lateral
+- dar zoom imagem produto
+
+- construir páginas menu lateral
+
+- popup cookies
+- popup adicionar tela inicial
+- notificações site
