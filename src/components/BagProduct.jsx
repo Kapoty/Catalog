@@ -12,6 +12,7 @@ import Divider from '@material-ui/core/Divider';
 import Chip from '@material-ui/core/Chip';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
+import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 
@@ -59,6 +60,11 @@ const useStyles = (theme) => ({
 	qntLabel: {
 		margin: theme.spacing(0, 1),
 	},
+	removeSection: {
+		margin: theme.spacing(1),
+		display: 'flex',
+		justifyContent: 'center',
+	},
 });
 
 class BagProduct extends React.Component {
@@ -99,6 +105,11 @@ class BagProduct extends React.Component {
 							</Typography>
 							<IconButton aria-label="close" onClick={() => {}}>
 								<AddCircleIcon />
+							</IconButton>
+						</div>
+						<div className={classes.removeSection}>
+							<IconButton aria-label="close" onClick={() => {}}>
+								<DeleteIcon />
 							</IconButton>
 						</div>
 					</CardContent>

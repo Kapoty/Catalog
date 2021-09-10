@@ -20,6 +20,8 @@ import QuestionAnswerIcon from '@material-ui/icons/QuestionAnswer';
 import StoreIcon from '@material-ui/icons/Store';
 import AssignmentIcon from '@material-ui/icons/Assignment';
 import ScreenLockPortraitIcon from '@material-ui/icons/ScreenLockPortrait';
+import InstagramIcon from '@material-ui/icons/Instagram';
+import WhatsappIcon from '@material-ui/icons/Whatsapp';
 
 const useStyles = (theme) => ({
 	logo: {
@@ -57,6 +59,12 @@ class CustomAppBar extends React.Component {
 		this.props.history.push(page);
 	}
 
+	openWhatsapp() {
+		const url = `https://api.whatsapp.com/send?phone=05562993547056&text=Olá, tudo bem?`;
+		var encoded = encodeURI(url);
+		window.open(encoded, '_blank');
+	}
+
 	render() {
 		const { classes } = this.props;
 		return <React.Fragment>
@@ -86,6 +94,17 @@ class CustomAppBar extends React.Component {
 							<ListItem button key={4} onClick={() => this.handleMenuClick('/politica-de-privacidade')}>
 								<ListItemIcon><ScreenLockPortraitIcon /></ListItemIcon>
 								<ListItemText primary={"Política de Privacidade"} />
+							</ListItem>
+						</List>
+						<Divider/>
+						<List>
+							<ListItem button key={4} onClick={() => window.open('https://www.instagram.com/belalilymf/', '_blank')}>
+								<ListItemIcon><InstagramIcon /></ListItemIcon>
+								<ListItemText primary={"@belalilymf"} />
+							</ListItem>
+							<ListItem button key={4} onClick={this.openWhatsapp}>
+								<ListItemIcon><WhatsappIcon /></ListItemIcon>
+								<ListItemText primary={"(62) 9 9999-8888"} />
 							</ListItem>
 						</List>
 					</Drawer>

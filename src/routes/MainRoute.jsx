@@ -17,15 +17,16 @@ import Bag from '../components/Bag';
 import InternalPage from '../components/InternalPage';
 import ProductDialog from '../components/ProductDialog';
 import FilterDialog from '../components/FilterDialog';
+import CookiesDialog from '../components/CookiesDialog';
 
 const theme = createTheme({
 	palette: {
 		/*primary: pink,
 		secondary: pink,*/
 		primary: {
-			light: '#f26389',
+			light: '#f47b9b',
 		    main: '#f26389',
-		    dark: '#002884',
+		    dark: '#f04b77',
 		    contrastText: '#fff'
 		}
 	}
@@ -39,12 +40,13 @@ export default class MainRoute extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {lastPage: '/', addedToBag: false, filterDialogOpened: false, filter: {}};
+		this.state = {lastPage: '/', addedToBag: false, filterDialogOpened: false, filter: {}, cookiesDialogOpenend: true};
 		this.addToBag = this.addToBag.bind(this)
 		this.closeAddToBag = this.closeAddToBag.bind(this);
 		this.openFilter = this.openFilter.bind(this);
 		this.setFilter = this.setFilter.bind(this);
 		this.closeFilter = this.closeFilter.bind(this);
+		this.closeCookiesDialog = this.closeCookiesDialog.bind(this);
 	}
 
 	addToBag(item) {
@@ -65,6 +67,10 @@ export default class MainRoute extends React.Component {
 
 	closeFilter() {
 		this.setState({filterDialogOpened: false});
+	}
+
+	closeCookiesDialog() {
+		this.setState({cookiesDialogOpenend: false});
 	}
 
 	render() {
@@ -91,6 +97,7 @@ export default class MainRoute extends React.Component {
 					TransitionComponent={Transition}
 					message="T-Shirt Amarela foi adicionada à sua sacola!"
 				/>
+				<CookiesDialog open={this.state.cookiesDialogOpenend} history={this.props.history} closeCookiesDialog={this.closeCookiesDialog}/>
 			</ThemeProvider>
 		</React.Fragment>
 	}

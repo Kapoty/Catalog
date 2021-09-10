@@ -8,9 +8,18 @@ import Dialog from '@material-ui/core/Dialog';
 import Slide from '@material-ui/core/Slide';
 import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsOfUse from './TermsOfUse';
+import AboutUs from './AboutUs'
+import FAQ from './FAQ'
 
 const useStyles = (theme) => ({
-
+	appBar: {
+		position: 'relative',
+	},
+	content: {
+		padding: theme.spacing(3, 2),
+	},
 });
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -22,10 +31,10 @@ class InternalPage extends React.Component {
 	constructor(props) {
 		super(props);
 		this.pages = [{pathname: 'frete-gratis', name: 'Frete Grátis', component: null},
-					{pathname: 'perguntas-frequentes', name: 'Perguntas Frequentes', component: null},
-					{pathname: 'quem-somos', name: 'Quem Somos', component: null},
-					{pathname: 'termos-de-uso', name: 'Termos de Uso', component: null},
-					{pathname: 'politica-de-privacidade', name: 'Política de Privacidade', component: null}];
+					{pathname: 'perguntas-frequentes', name: 'Perguntas Frequentes', component: FAQ},
+					{pathname: 'quem-somos', name: 'Quem Somos', component: AboutUs},
+					{pathname: 'termos-de-uso', name: 'Termos de Uso', component: TermsOfUse},
+					{pathname: 'politica-de-privacidade', name: 'Política de Privacidade', component: PrivacyPolicy}];
 		let exp = '';
 		this.pages.forEach((p, i) => exp += `${(i!=0)?'|':''}(${p.pathname})`);
 		this.pageReg = new RegExp('\/('+exp+')', '');
@@ -58,7 +67,7 @@ class InternalPage extends React.Component {
 
 		return <React.Fragment>
 			<Dialog fullScreen open={this.state.dialogOpen} onClose={this.handleDialogClose} TransitionComponent={Transition}>
-				<AppBar>
+				<AppBar className={classes.appBar}>
 					<Toolbar>
 						<IconButton edge="start" color="inherit" onClick={this.handleDialogClose} aria-label="close">
 							<CloseIcon />
@@ -68,6 +77,9 @@ class InternalPage extends React.Component {
 						</Typography>
 					</Toolbar>
 				</AppBar>
+				<div className={classes.content}>
+					{(this.pages[this.state.currentPage].component != null) ? React.createElement(this.pages[this.state.currentPage].component, {}) : ''}
+				</div>
 			</Dialog>
 		</React.Fragment>
 	}
