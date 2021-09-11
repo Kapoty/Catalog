@@ -8,3 +8,5 @@
 - popup cookies
 - popup adicionar tela inicial
 - notificações site
+
+- impedir tradução
