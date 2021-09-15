@@ -45,7 +45,7 @@ class BottomNav extends React.Component {
 				}
 			}} showLabels className={classes.root}>
 			<BottomNavigationAction label="Catálogo" icon={<PhotoAlbumIcon />} />
-			<BottomNavigationAction label="Sacola" icon={<StyledBadge badgeContent={5} color="secondary">
+			<BottomNavigationAction label="Sacola" icon={<StyledBadge badgeContent={this.props.bagQnt} color="secondary">
 														<LocalMallIcon />
 														</StyledBadge>}
 														/>

@@ -1,0 +1,99 @@
+{
+	"imagePath":"./assets/image/catalog/",
+	"categories":{
+		"0":{
+			"name":"Destaque"
+		},
+		"1":{
+			"name":"T-Shirt"
+		},
+		"2":{
+			"name":"Body"
+		},
+		"3":{
+			"name":"Cropped"
+		}
+	},
+	"sizes":{
+		"0":{
+			"name":"P"
+		},
+		"1":{
+			"name":"M"
+		},
+		"2":{
+			"name":"G"
+		},
+		"3":{
+			"name":"Único"
+		}
+	},
+	"items":{
+		"1":{
+			"id":"1",
+			"name":"T-Shirt Stitch",
+			"sizes":[
+				{
+					"id":"0",
+					"qnt":3
+				},
+				{
+					"id":"1",
+					"qnt":4
+				},
+				{
+					"id":"2",
+					"qnt":0
+				}
+			],
+			"imgCount":4,
+			"price": 12.50,
+			"categories":[
+				"0",
+				"1"
+			],
+			"priority":1,
+			"desc":"Lorem Impsum"
+		},
+		"2":{
+			"id":"2",
+			"name":"T-Shirt Vogue",
+			"sizes":[
+				{
+					"id":"0",
+					"qnt":2
+				},
+				{
+					"id":"1",
+					"qnt":2
+				}
+			],
+			"imgCount":1,
+			"price":13,
+			"categories":[
+				"0",
+				"1"
+			],
+			"priority":2,
+			"desc":"Lorem Impsum Sianet"
+		},
+		"3":{
+			"id":"3",
+			"name":"Body Falso",
+			"sizes":[
+				{
+					"id":"3",
+					"qnt":3
+				}
+			],
+			"imgCount":1,
+			"price":25,
+			"categories":[
+				"0",
+				"2"
+			],
+			"priority":3,
+			"desc":"Lorem Impsum Body"
+		}
+	}
+}

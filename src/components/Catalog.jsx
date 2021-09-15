@@ -8,6 +8,8 @@ import Typography from '@material-ui/core/Typography';
 
 import Product from './Product'
 
+import CatalogData from '../data/CatalogData'
+
 const useStyles = (theme) => ({
 	root: {
 		display: 'flex',
@@ -50,15 +52,6 @@ const useStyles = (theme) => ({
 	}
 });
 
-var itemData = [];
-for (let j = 0; j<2; j++)
-	for (let i = 1; i<=6; i++)
-	itemData.push({img: `./assets/image/catalog/${i}.jpg`,
-		price: i+10,
-		category: Math.round(Math.random()),
-		featured: Math.round(Math.random()),
-		name: 'T-Shirt Amarela'});
-
 class Catalog extends React.Component {
 
 	constructor(props) {
@@ -82,32 +75,20 @@ class Catalog extends React.Component {
 				onChange={this.changeTab}
 				centered
 				>
-					<Tab label="Destaques" />
-					<Tab label="T-Shirts" />
-					<Tab label="Body's" />
+					{Object.keys(CatalogData.categories).map((categoryId) => 
+						<Tab label={CatalogData.categories[categoryId].name} key={categoryId}/>
+					)}/>
 				</Tabs>
 			</Paper>
-			<div style={{display: this.state.tab == 0 ? 'block' : 'none'}}>
-				<div className={classes.products}>
-						{itemData.map((item, i) => {return (item.featured) ?
-								<Product key={i} item={item} history={this.props.history}/> : ''}
-						)}
+			{Object.keys(CatalogData.categories).map((categoryId) => 
+				<div style={{display: this.state.tab == categoryId ? 'block' : 'none'}} key={categoryId}>
+					<div className={classes.products}>
+							{this.props.filteredCatalog.map((itemId, i) => {return (CatalogData.items[itemId].categories.includes(categoryId)) ?
+									<Product key={itemId} order={i} item={CatalogData.items[itemId]} history={this.props.history}/> : ''}
+							)}
+					</div>
 				</div>
-			</div>
-			<div style={{display: this.state.tab == 1 ? 'block' : 'none'}}>
-				<div className={classes.products}>
-						{itemData.map((item, i) => {return (item.category == 0) ?
-								<Product key={i} item={item} history={this.props.history}/> : ''}
-						)}
-				</div>
-			</div>
-			<div style={{display: this.state.tab == 2 ? 'block' : 'none'}}>
-				<div className={classes.products}>
-						{itemData.map((item, i) => {return (item.category == 1) ?
-								<Product key={i} item={item} history={this.props.history}/> : ''}
-						)}
-				</div>
-			</div>
+			)}
 		</React.Fragment>
 	}
 

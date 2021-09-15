@@ -9,6 +9,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 
+import CatalogData from '../data/CatalogData'
+
 const useStyles = (theme) => ({
 	root: {
 		[theme.breakpoints.down('sm')]: {
@@ -39,12 +41,12 @@ class Product extends React.Component {
 	render() {
 		const { classes } = this.props;
 		return <React.Fragment>
-			<Card className={classes.root} onClick={() => this.props.history.push('/p/tshirt-amarela')}>
+			<Card className={classes.root} style={{order: this.props.order}} onClick={() => this.props.history.push(`/p/${this.props.item.id}`)}>
 				<CardActionArea>
 					<CardMedia
 					className={classes.media}
-					image={this.props.item.img}
-					title="Contemplative Reptile"
+					image={`${CatalogData.imagePath}${this.props.item.id}/1-256.jpg`}
+					title={this.props.item.name}
 					/>
 					<CardContent>
 						<Typography gutterBottom variant="h6" component="h6" align="center">

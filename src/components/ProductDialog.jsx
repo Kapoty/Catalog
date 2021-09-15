@@ -18,6 +18,9 @@ import Chip from '@material-ui/core/Chip';
 import AddCircleIcon from '@material-ui/icons/AddCircle';
 import RemoveCircleIcon from '@material-ui/icons/RemoveCircle';
 import TextField from '@material-ui/core/TextField';
+import ZoomInIcon from '@material-ui/icons/ZoomIn';
+
+import CatalogData from '../data/CatalogData';
 
 const useStyles = (theme) => ({
 	root: {
@@ -42,6 +45,37 @@ const useStyles = (theme) => ({
 		flexWrap: 'nowrap',
 		// Promote the list into his own layer on Chrome. This cost memory but helps keeping high FPS.
 		transform: 'translateZ(0)',
+		width: '100%',
+		'&::-webkit-scrollbar': {
+			height: '5px',
+			[theme.breakpoints.up('md')]: {
+				height: '10px',
+			},
+			backgroundColor: theme.palette.background.paper,
+		},
+		'&::-webkit-scrollbar-thumb:horizontal': {
+			backgroundColor: theme.palette.primary.main,
+		},
+	},
+	imageListItem: {
+		'&:hover': {
+			cursor: 'pointer',
+			'& svg': {
+				opacity: '100%',
+				transition: 'opacity 0.25s',
+			}
+		}
+	},
+	zoomInIcon: {
+		position: 'absolute',
+		left: '50%',
+		top: '50%',
+		color: 'white',
+		opacity: '50%',
+		fontSize: '50px',
+		transform: 'translate(-50%, -50%)',
+		transition: 'opacity 0.25s',
+		filter: 'drop-shadow( 3px 3px 2px rgba(0, 0, 0, .7))',
 	},
 	sizeSection: {
 		margin: theme.spacing(3, 2),
@@ -83,12 +117,19 @@ class ProductDialog extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.state = {dialogOpen: false, imageOpen: false, image: ''};
-		this.pageReg = /\/p\/[\w\-]+/;
+		this.state = {dialogOpen: false, imageOpen: false, image: '', itemId: 1, size: 0, qnt: 0, sizesQnt: []};
+		this.pageReg = /\/p\/[\d]+/;
+		this.contentRef = React.createRef();
+		this.descSectionRef = React.createRef();
+
 		this.handleDialogClose = this.handleDialogClose.bind(this);
 		this.handleAddToBag = this.handleAddToBag.bind(this);
 		this.openImage = this.openImage.bind(this);
 		this.closeImage = this.closeImage.bind(this);
+		this.handleKnowMore = this.handleKnowMore.bind(this);
+		this.setSize = this.setSize.bind(this);
+		this.addQnt = this.addQnt.bind(this);
+		this.removeQnt = this.removeQnt.bind(this);
 	}
 
 	handleDialogClose() {
@@ -96,7 +137,7 @@ class ProductDialog extends React.Component {
 	}
 
 	handleAddToBag() {
-		this.props.addToBag({});
+		this.props.addToBag(this.state.itemId, this.state.size, this.state.qnt);
 		this.props.history.push(this.props.lastPage);
 	}
 
@@ -108,42 +149,93 @@ class ProductDialog extends React.Component {
 		this.setState({imageOpen: false});
 	}
 
+	handleKnowMore() {
+		this.contentRef.current.scrollTop =  this.descSectionRef.current.offsetTop - this.contentRef.current.offsetTop - 10;
+	}
+
+	setSize(sizeId) {
+		this.setState({size: sizeId, qnt: Math.min(this.state.qnt, CatalogData.items[this.state.itemId].sizes[sizeId].qnt)});
+	}
+
+	addQnt() {
+		this.setState({qnt: this.state.qnt+1});
+	}
+
+	removeQnt() {
+		this.setState({qnt: this.state.qnt-1});
+	}
+
 	render() {
 		const { classes } = this.props;
 
+		if (this.pageReg.test(this.props.location.pathname)) {
+			if (this.state.dialogOpen == false) {
+				let itemId = this.props.location.pathname.match(/(?<=\/p\/)[\d]+/)[0];
+				if (!Object.keys(CatalogData.items).includes(itemId)) {
+					this.props.history.push(this.props.lastPage);
+				} else {
+					this.state.itemId = itemId;
+					this.state.dialogOpen = true;
+					this.state.sizesQnt = [];
+					CatalogData.items[itemId].sizes.forEach((size, i) => {
+						let qnt = size.qnt;
+						for (let j=0; j<this.props.bag.items.length; j++)
+							if (this.props.bag.items[j].itemId == itemId && this.props.bag.items[j].size == i) {
+								qnt -= this.props.bag.items[j].qnt;
+								break;
+							}
+						this.state.sizesQnt.push(qnt);
+					});
+					this.state.qnt = 0;
+					this.state.size = 0;
+					for (let i=0; i<this.state.sizesQnt.length; i++)
+						if (this.state.sizesQnt[i] > 0) {
+							this.state.size = i;
+							this.state.qnt = 1;
+							break;
+						}
+				}
+			}
+		} else if (this.state.dialogOpen == true) {
+			this.state.dialogOpen = false;
+		}
+
 		return <React.Fragment>
-			<Dialog fullScreen open={this.pageReg.test(this.props.location.pathname)} onClose={this.handleDialogClose} TransitionComponent={Transition} className={classes.root}>
+			<Dialog fullScreen open={this.state.dialogOpen} onClose={this.handleDialogClose} TransitionComponent={Transition} className={classes.root}>
 				<DialogTitle id="customized-dialog-title" onClose={this.handleDialogClose}>
-					T-Shirt Amarela
+					{CatalogData.items[this.state.itemId].name}
 					<IconButton aria-label="close" className={classes.closeButton} onClick={this.handleDialogClose}>
 						<CloseIcon />
 					</IconButton>
 				</DialogTitle>
-				<DialogContent dividers>
+				<DialogContent dividers ref={this.contentRef}>
 					<div className={classes.gallerySection}>
 						<Hidden only={['sm', 'md', 'lg', 'xl']}>
 							<ImageList className={classes.imageList} cols={1} rowHeight={250}>
-								{imgs.map((img, i) => (
-									<ImageListItem key={i}>
-										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
+								{[...Array(CatalogData.items[this.state.itemId].imgCount).keys()].map((imgId) => (
+									<ImageListItem className={classes.imageListItem} key={imgId} onClick={() => this.openImage(`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}.jpg`)}>
+										<img src={`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}-512.jpg`} alt={CatalogData.items[this.state.itemId].name}/>
+										<ZoomInIcon className={classes.zoomInIcon}/>
 									</ImageListItem>
 								))}
 							</ImageList>
 						</Hidden>
 						<Hidden only={['xs', 'md', 'lg', 'xl']}>
 							<ImageList className={classes.imageList} cols={2} rowHeight={300}>
-								{imgs.map((img, i) => (
-									<ImageListItem key={i}>
-										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
+								{[...Array(CatalogData.items[this.state.itemId].imgCount).keys()].map((imgId) => (
+									<ImageListItem className={classes.imageListItem} key={imgId} onClick={() => this.openImage(`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}.jpg`)}>
+										<img src={`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}-512.jpg`} alt={CatalogData.items[this.state.itemId].name}/>
+										<ZoomInIcon className={classes.zoomInIcon}/>
 									</ImageListItem>
 								))}
 							</ImageList>
 						</Hidden>
 						<Hidden smDown>
 							<ImageList className={classes.imageList} cols={3} rowHeight={300}>
-								{imgs.map((img, i) => (
-									<ImageListItem key={i}>
-										<img src={img} alt={'title'} onClick={() => this.openImage(img)}/>
+								{[...Array(CatalogData.items[this.state.itemId].imgCount).keys()].map((imgId) => (
+									<ImageListItem className={classes.imageListItem} key={imgId} onClick={() => this.openImage(`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}.jpg`)}>
+										<img src={`${CatalogData.imagePath}${this.state.itemId}/${imgId+1}-512.jpg`} alt={CatalogData.items[this.state.itemId].name}/>
+										<ZoomInIcon className={classes.zoomInIcon}/>
 									</ImageListItem>
 								))}
 							</ImageList>
@@ -151,7 +243,7 @@ class ProductDialog extends React.Component {
 					</div>
 					<div className={classes.priceSection}>
 						<Typography variant="h6" color="primary" component="p" align="center">
-							R$ {15}
+							R$ {CatalogData.items[this.state.itemId].price}
 						</Typography>
 					</div>
 					<div className={classes.sizeSection}>
@@ -159,47 +251,34 @@ class ProductDialog extends React.Component {
 							Selecione o Tamanho
 						</Typography>
 						<div className={classes.sizeOptions}>
-							<Chip className={classes.sizeChip} label="P" />
-							<Chip className={classes.sizeChip} color="primary" label="M" />
-							<Chip className={classes.sizeChip} label="G" />
+							{CatalogData.items[this.state.itemId].sizes.map((size, i) => (
+								<Chip className={classes.sizeChip} label={CatalogData.sizes[size.id].name} key={size.id} onClick={() => this.setSize(size.id)} color={this.state.size == i ? "primary" : 'default'} disabled={this.state.sizesQnt[i] == 0 ? true : false}/>))
+							}
 						</div>
 					</div>
 					<div className={classes.qntSection}>
-						<IconButton aria-label="close" onClick={() => {}}>
+						<IconButton aria-label="close" onClick={this.removeQnt} disabled={this.state.qnt <= 1}>
 							<RemoveCircleIcon />
 						</IconButton>
 						<Typography className={classes.qntLabel} variant="h6" color="primary" component="p" align="center">
-							1
+							{this.state.qnt}
 						</Typography>
-						<IconButton aria-label="close" onClick={() => {}}>
+						<IconButton aria-label="close" onClick={this.addQnt} disabled={this.state.qnt >= this.state.sizesQnt[this.state.size]}>
 							<AddCircleIcon />
 						</IconButton>
 					</div>
 					<Divider variant='middle'/>
-					<div className={classes.descSection}>
+					<div className={classes.descSection} ref={this.descSectionRef}>
 						<Typography gutterBottom>
-							Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Vivamus sagittis
-							lacus vel augue laoreet rutrum faucibus dolor auctor.
-						</Typography>
-						<Typography gutterBottom>
-							Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-							scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-							auctor fringilla.
-						</Typography>
-						<Typography gutterBottom>
-							Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-							scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-							auctor fringilla.
-						</Typography>
-						<Typography gutterBottom>
-							Aenean lacinia bibendum nulla sed consectetur. Praesent commodo cursus magna, vel
-							scelerisque nisl consectetur et. Donec sed odio dui. Donec ullamcorper nulla non metus
-							auctor fringilla.
+							{CatalogData.items[this.state.itemId].desc}
 						</Typography>
 					</div>
 				</DialogContent>
 				<DialogActions>
-					<Button onClick={this.handleAddToBag} color="primary">
+					<Button onClick={this.handleKnowMore}>
+						Saiba Mais
+					</Button>
+					<Button onClick={this.handleAddToBag} color="primary" disabled={this.state.qnt == 0}>
 						Adicionar à sacola
 					</Button>
 				</DialogActions>
@@ -212,7 +291,7 @@ class ProductDialog extends React.Component {
 						</IconButton>
 					</DialogTitle>
 					<DialogContent dividers style={{display: 'flex', justifyContent: 'center'}}>
-						<img src={'./assets/image/catalog/1.jpg'} alt={'title'} style={{height: '100%'}} onClick={() => this.openImage(img)}/>
+						<img src={this.state.image} alt={'title'} style={{height: '100%'}} onClick={() => this.openImage(img)}/>
 					</DialogContent>
 				</Dialog>
 		</React.Fragment>

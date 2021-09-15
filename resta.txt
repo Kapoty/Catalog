@@ -1,12 +1,26 @@
 - finalizar sacola e ir pro wpp [OK]
-- redes sociais e contato menu lateral
+- redes sociais e contato menu lateral [OK]
 - dar zoom imagem produto [OK]
 
-- construir páginas menu lateral
+- construir páginas menu lateral [PARCIAL OK]
 
 - popup inicial
-- popup cookies
+- popup cookies [OK]
 - popup adicionar tela inicial
 - notificações site
 
-- impedir tradução
+- impedir tradução [OK]
+
+- Logo no menu da esquerda, Bela Lily no centro [OK]
+- Melhorar galeria [OK]
+- Adicionar botão saiba mais produto [OK]
+- Adicionar ordenação filtro [OK]
+ Preço Crescente
+ Preço Decrescente
+
+- Fazer protótipo funcionar com cookies
+ Popup Cookies [OK]
+ Produtos Catálogo [OK]
+ Página Produto [OK]
+ Produtos Carrinho [OK]
+ Filtro [OK]

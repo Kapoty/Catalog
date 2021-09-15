@@ -21,6 +21,8 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 
+import CatalogData from '../data/CatalogData';
+
 const useStyles = (theme) => ({
 	root: {
 		width: '100%',
@@ -61,13 +63,17 @@ const useStyles = (theme) => ({
 	},
 });
 
-var itemData = [];
-	for (let i = 1; i<=5; i++)
-	itemData.push({img: `./assets/image/catalog/${i}.jpg`,
-		price: i+10,
-		category: Math.round(Math.random()),
-		featured: Math.round(Math.random()),
-		name: 'T-Shirt Amarela'});
+const paymentNames = {
+	'1': 'Dinheiro',
+	'2': 'Débito',
+	'3': 'Crédito',
+	'4': 'PIX'
+};
+
+const shippingNames = {
+	'1': 'Gratuita',
+	'2': 'Uber Flash'
+}
 
 class Bag extends React.Component {
 
@@ -81,35 +87,73 @@ class Bag extends React.Component {
 	}
 
 	openWhatsapp() {
-		const url = `https://api.whatsapp.com/send?phone=05562993547056&text=Olá, tudo bem?
-Meu nome é *Pedro Henrique Martins Candido da Silva*
-Gostaria de ser tratado como *Pedro*
-Meu Whatsapp é *(62) 9 9354-7056*
-O método de pagamento que escolhi foi *Dinheiro*
-A forma de entrega será *Gratuita*
-Os produtos que desejo são:
-1x [12 T-Shirt Amarela] 12.00
-2x [13 T-Shirt Azul] 26.00
-1x [15 Body Verde] 15.00
-Total 53.00`;
+		try {
+		let url = `https://api.whatsapp.com/send?phone=05562993547056&text=Olá, tudo bem?\n
+Meu nome é *${this.props.bag.info.name}*\n
+Gostaria de ser tratado como *${this.props.bag.info.desiredName}*\n
+Meu Whatsapp é *${this.props.bag.info.whatsapp}*\n
+O método de pagamento que escolhi foi *${paymentNames[this.props.bag.info.payment]}*\n
+A forma de entrega será *${shippingNames[this.props.bag.info.shipping]}*\n
+Os produtos que desejo são:\n\n`;
+		let totalPrice = 0;
+		this.props.bag.items.forEach((item) => {
+			url+= `${item.qnt}x [${item.itemId}] "${`${CatalogData.items[item.itemId].name}" (${CatalogData.sizes[CatalogData.items[item.itemId].sizes[item.size].id].name}`}) R$ ${CatalogData.items[item.itemId].price * item.qnt}\n`
+			totalPrice += CatalogData.items[item.itemId].price * item.qnt;
+		});
+		url += `\nTotal R$ ${totalPrice}`;
 		var encoded = encodeURI(url);
 		window.open(encoded, '_blank');
 	}
+	catch (e) {
+		console.log(e);
+	}
+	}
 
 	handleNext() {
-		this.setState({step: this.state.step+1});
+		if (this.state.step == 0)
+			this.setState({step: this.state.step+1,
+				payment: this.props.bag.info.payment,
+				shipping: this.props.bag.info.shipping,
+				name: this.props.bag.info.name,
+				desiredName: this.props.bag.info.desiredName,
+				whatsapp: this.props.bag.info.whatsapp});
+		else if (this.state.step == 1) {
+			this.props.updateBagInfo({name: this.state.name,
+				desiredName: this.state.desiredName,
+				whatsapp: this.state.whatsapp,
+				payment: this.state.payment,
+				shipping: this.state.shipping});
+			this.setState({step: this.state.step+1});
+		} else this.setState({step: this.state.step+1});
 	}
 
 	handleBack() {
-		this.setState({step: this.state.step-1});
+		if (this.state.step == 1) {
+			this.props.updateBagInfo({name: this.state.name,
+				desiredName: this.state.desiredName,
+				whatsapp: this.state.whatsapp,
+				payment: this.state.payment,
+				shipping: this.state.shipping});
+			this.setState({step: this.state.step-1});
+		} else this.setState({step: this.state.step-1});
 	}
 
 	handleReset() {
-		this.setState({step: 0});
+		this.props.resetBag();
+	}
+
+	componentDidUpdate(prevProps) {
+		if (this.props.bag.items.length == 0 && this.state.step != 0) {
+			this.setState({step: 0});
+		}
 	}
 
 	render() {
 		const { classes } = this.props;
+
+		let totalPrice = 0;
+		this.props.bag.items.forEach((item) => totalPrice += CatalogData.items[item.itemId].price * item.qnt);
+
 		return <React.Fragment>
 			<div className={classes.root}>
 				<Stepper activeStep={this.state.step} orientation="vertical" className={classes.stepper}>
@@ -117,7 +161,7 @@ Total 53.00`;
 						<StepLabel>Escolha os seus produtos</StepLabel>
 						<StepContent>
 							<div className={classes.cards}>
-								{itemData.map((item, i) => <BagProduct key={i} item={item}/>)}
+								{this.props.bag.items.map((item, i) => <BagProduct key={item.itemId+'-'+item.size} item={item} addItemToBag={this.props.addItemToBag} removeItemFromBag={this.props.removeItemFromBag} deleteItemFromBag={this.props.deleteItemFromBag}/>)}
 							</div>
 							<div className={classes.actionsContainer}>
 								<div>
@@ -132,6 +176,7 @@ Total 53.00`;
 										color="primary"
 										className={classes.button}
 										onClick={this.handleNext}
+										disabled={this.props.bag.items.length == 0}
 									>
 										Avançar
 									</Button>
@@ -143,9 +188,9 @@ Total 53.00`;
 						<StepLabel>Nos informe...</StepLabel>
 						<StepContent>
 							<div className={classes.inputs}>
-								<TextField required variant="outlined" className={classes.input} id="name" label="Seu nome completo" defaultValue=""/>
-								<TextField required variant="outlined" className={classes.input} id="name" label="Como gostaria de ser chamado(a)" defaultValue=""/>
-								<TextField required variant="outlined" className={classes.input} id="name" label="Seu Whatsapp (com DDD)" defaultValue=""/>
+								<TextField required onChange={(e) => this.setState({name: e.target.value})} variant="outlined" className={classes.input} id="name" label="Seu nome completo" defaultValue={this.props.bag.info.name}/>
+								<TextField required onChange={(e) => this.setState({desiredName: e.target.value})} variant="outlined" className={classes.input} id="desiredName" label="Como gostaria de ser chamado(a)" defaultValue={this.props.bag.info.desiredName}/>
+								<TextField required onChange={(e) => this.setState({whatsapp: e.target.value})} type="number" variant="outlined" className={classes.input} id="whatsapp" label="Seu Whatsapp (com DDD)" defaultValue={this.props.bag.info.whatsapp}/>
 								<FormControl variant="outlined" className={classes.input}>
 									<InputLabel htmlFor="payment">O método de pagamento</InputLabel>
 									<Select
@@ -159,12 +204,12 @@ Total 53.00`;
 										}}
 									>
 										<option aria-label="Selecione" value="" />
-										<option value={1}>Dinheiro</option>
+										<option value={1}>{paymentNames['1']}</option>
 										<optgroup label="Cartão">
-											<option value={2}>Débito</option>
-											<option value={3}>Crédito</option>
+											<option value={2}>{paymentNames['2']}</option>
+											<option value={3}>{paymentNames['3']}</option>
 										</optgroup>
-										<option value={4}>PIX</option>
+										<option value={4}>{paymentNames['4']}</option>
 									</Select>
 								</FormControl>
 								<FormControl variant="outlined" className={classes.input}>
@@ -179,8 +224,8 @@ Total 53.00`;
 										}}
 									>
 										<option aria-label="Selecione" value="" />
-										<option value={1}>Gratuita</option>
-										<option value={2}>Uber Flash</option>
+										<option value={1}>{shippingNames['1']}</option>
+										<option value={2}>{shippingNames['2']}</option>
 									</Select>
 								</FormControl>
 								<Typography className={classes.input}>
@@ -205,6 +250,11 @@ Total 53.00`;
 										color="primary"
 										className={classes.button}
 										onClick={this.handleNext}
+										disabled={this.state.name == '' ||
+											this.state.desiredName == '' ||
+											this.state.whatsapp == '' ||
+											this.state.payment == '' ||
+											this.state.shipping == ''}
 									>
 										Avançar
 									</Button>
@@ -216,11 +266,11 @@ Total 53.00`;
 						<StepLabel>Revise e finalize o seu pedido</StepLabel>
 						<StepContent>
 							<Typography>
-								Meu nome é <b>Pedro Henrique Martins Candido da Silva</b><br/>
-								Gostaria de ser tratado como <b>Pedro</b><br/>
-								Meu Whatsapp é <b>(62) 9 9354-7056</b><br/>
-								O método de pagamento que escolhi foi <b>Dinheiro</b><br/>
-								A forma de entrega será <b>Gratuita</b><br/>
+								Meu nome é <b>{this.props.bag.info.name}</b><br/>
+								Gostaria de ser tratado como <b>{this.props.bag.info.desiredName}</b><br/>
+								Meu Whatsapp é <b>{this.props.bag.info.whatsapp}</b><br/>
+								O método de pagamento que escolhi foi <b>{paymentNames[this.props.bag.info.payment]}</b><br/>
+								A forma de entrega será <b>{shippingNames[this.props.bag.info.shipping]}</b><br/>
 								Os produtos que desejo são:
 							</Typography>
 							<TableContainer component={Paper}>
@@ -235,30 +285,16 @@ Total 53.00`;
 										</TableRow>
 									</TableHead>
 									<TableBody>
-										<TableRow>
-											<TableCell>12</TableCell>
-											<TableCell>T-Shirt Amarela</TableCell>
-											<TableCell align="right">1</TableCell>
-											<TableCell align="right">12,00</TableCell>
-											<TableCell align="right">12,00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>13</TableCell>
-											<TableCell>T-Shirt Azul</TableCell>
-											<TableCell align="right">2</TableCell>
-											<TableCell align="right">13,00</TableCell>
-											<TableCell align="right">26,00</TableCell>
-										</TableRow>
-										<TableRow>
-											<TableCell>15</TableCell>
-											<TableCell>Body Verde</TableCell>
-											<TableCell align="right">1</TableCell>
-											<TableCell align="right">15,00</TableCell>
-											<TableCell align="right">15,00</TableCell>
-										</TableRow>
+										{this.props.bag.items.map((item, i) => <TableRow key={i}>
+											<TableCell align="right">{item.itemId}</TableCell>
+											<TableCell>{`${CatalogData.items[item.itemId].name} (${CatalogData.sizes[CatalogData.items[item.itemId].sizes[item.size].id].name})`}</TableCell>
+											<TableCell align="right">{item.qnt}</TableCell>
+											<TableCell align="right">{CatalogData.items[item.itemId].price}</TableCell>
+											<TableCell align="right">{CatalogData.items[item.itemId].price * item.qnt}</TableCell>
+										</TableRow>)}
 										<TableRow>
 											<TableCell colSpan={4} align="right">Total</TableCell>
-											<TableCell align="right">53.00</TableCell>
+											<TableCell align="right">{totalPrice}</TableCell>
 										</TableRow>
 									</TableBody>
 								</Table>
@@ -298,6 +334,12 @@ Total 53.00`;
 					</Button>
 					<br/>
 					<br/>
+					<Button
+						className={classes.button}
+						onClick={this.handleBack}
+					>
+						Voltar
+					</Button>
 					<Button className={classes.button} onClick={this.handleReset}>Realizar novo pedido</Button>
 				</div> : ''}
 			</div>

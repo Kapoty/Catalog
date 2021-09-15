@@ -16,6 +16,8 @@ import DeleteIcon from '@material-ui/icons/Delete';
 import TextField from '@material-ui/core/TextField';
 import IconButton from '@material-ui/core/IconButton';
 
+import CatalogData from '../data/CatalogData';
+
 const useStyles = (theme) => ({
 	root: {
 		[theme.breakpoints.down('sm')]: {
@@ -81,34 +83,34 @@ class BagProduct extends React.Component {
 				<CardActionArea>
 					<CardMedia
 					className={classes.media}
-					image={this.props.item.img}
+					image={`${CatalogData.imagePath}${this.props.item.itemId}/1-256.jpg`}
 					title="Contemplative Reptile"
 					/>
 					<CardContent>
 						<Typography gutterBottom variant="h6" component="p" align="center">
-							{this.props.item.name}
+							{CatalogData.items[this.props.item.itemId].name}
 						</Typography>
 						<Typography variant="h6" color="primary" component="p" align="center">
-							R$ {this.props.item.price}
+							R$ {CatalogData.items[this.props.item.itemId].price * this.props.item.qnt}
 						</Typography>
 						<div className={classes.sizeSection}>
 							<div className={classes.sizeOptions}>
-								<Chip className={classes.sizeChip} color="primary" label="M" />
+								<Chip className={classes.sizeChip} label={CatalogData.sizes[CatalogData.items[this.props.item.itemId].sizes[this.props.item.size].id].name} color="primary"/>
 							</div>
 						</div>
 						<div className={classes.qntSection}>
-							<IconButton aria-label="close" onClick={() => {}}>
+							<IconButton aria-label="close" onClick={() => this.props.removeItemFromBag(this.props.item.itemId, this.props.item.size)} disabled={this.props.item.qnt == 1}>
 								<RemoveCircleIcon />
 							</IconButton>
 							<Typography className={classes.qntLabel} variant="h6" color="primary" component="p" align="center">
-								1
+								{this.props.item.qnt}
 							</Typography>
-							<IconButton aria-label="close" onClick={() => {}}>
+							<IconButton aria-label="close" onClick={() => this.props.addItemToBag(this.props.item.itemId, this.props.item.size)} disabled={this.props.item.qnt == CatalogData.items[this.props.item.itemId].sizes[this.props.item.size].qnt}>
 								<AddCircleIcon />
 							</IconButton>
 						</div>
 						<div className={classes.removeSection}>
-							<IconButton aria-label="close" onClick={() => {}}>
+							<IconButton aria-label="close" onClick={() => this.props.deleteItemFromBag(this.props.item.itemId, this.props.item.size)}>
 								<DeleteIcon />
 							</IconButton>
 						</div>

@@ -22,14 +22,15 @@ import AssignmentIcon from '@material-ui/icons/Assignment';
 import ScreenLockPortraitIcon from '@material-ui/icons/ScreenLockPortrait';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import WhatsappIcon from '@material-ui/icons/Whatsapp';
+import Link from '@material-ui/core/Link';
 
 const useStyles = (theme) => ({
 	logo: {
 		position: 'absolute',
 		left: '50%',
-		top: '0px',
-		marginLeft: '-24px',
-		height: '100%',
+		top: '50%',
+		height: '80%',
+		transform: 'translate(-50%, -50%)',
 	},
 	grow: {
     flexGrow: 1,
@@ -74,6 +75,7 @@ class CustomAppBar extends React.Component {
 						<MenuIcon />
 					</IconButton>
 					<Drawer anchor={'left'} open={Boolean(this.state.menuAnchor)} onClose={this.handleMenuClose}>
+						<Link href="#/" onClick={() => this.props.history.push("")}><img src='./assets/image/logo-256.png'/></Link>
 						<List>
 							<ListItem button key={0} onClick={() => this.handleMenuClick('/frete-gratis')}>
 								<ListItemIcon><LocalShippingIcon /></ListItemIcon>
@@ -108,7 +110,7 @@ class CustomAppBar extends React.Component {
 							</ListItem>
 						</List>
 					</Drawer>
-					<img className={classes.logo} src='./assets/image/logo-small.png' onClick={() => this.props.history.push('/')}/>
+					<img className={classes.logo} src='./assets/image/logo-texto.png' onClick={() => this.props.history.push('/')}/>
 					<div className={classes.grow} />
 					<IconButton edge="end" color="inherit" aria-label="search" onClick={this.props.openFilter}>
 						<SearchIcon />
