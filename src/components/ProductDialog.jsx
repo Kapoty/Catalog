@@ -154,7 +154,7 @@ class ProductDialog extends React.Component {
 	}
 
 	setSize(sizeId) {
-		this.setState({size: sizeId, qnt: Math.min(this.state.qnt, CatalogData.items[this.state.itemId].sizes[sizeId].qnt)});
+		this.setState({size: sizeId, qnt: Math.min(this.state.qnt, this.state.sizesQnt[sizeId])});
 	}
 
 	addQnt() {
