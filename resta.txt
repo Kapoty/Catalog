@@ -24,3 +24,5 @@
  Página Produto [OK]
  Produtos Carrinho [OK]
  Filtro [OK]
+
+Get-ChildItem -Filter "*.jsx" -Recurse | Get-Content | Measure-Object -line
