@@ -74,6 +74,7 @@ class CustomAppBar extends React.Component {
 					<IconButton edge="start" color="inherit" aria-label="menu" onClick={this.handleMenuOpen}>
 						<MenuIcon />
 					</IconButton>
+					<img className={classes.logoImg} src='./assets/image/logo-small.png' onClick={() => this.props.history.push('/')}/>
 					<Drawer anchor={'left'} open={Boolean(this.state.menuAnchor)} onClose={this.handleMenuClose}>
 						<Link href="#/" onClick={() => this.props.history.push("")}><img src='./assets/image/logo-256.png'/></Link>
 						<List>
