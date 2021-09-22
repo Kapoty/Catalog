@@ -50,7 +50,9 @@ class FAQ extends React.Component {
 		this.search = this.search.bind(this);
 	}
 
-	search() {
+	search(e) {
+		if (e!=null)
+			e.preventDefault();
 		this.setState({search: escapeRegex(this.searchTxt)});
 	}
 
