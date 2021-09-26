@@ -88,7 +88,7 @@ class Bag extends React.Component {
 
 	openWhatsapp() {
 		try {
-		let url = `https://api.whatsapp.com/send?phone=05562993547056&text=Olá, tudo bem?\n
+		let url = `https://api.whatsapp.com/send?phone=05562983118355&text=Olá, tudo bem?\n
 Meu nome é *${this.props.bag.info.name}*\n
 Gostaria de ser tratado como *${this.props.bag.info.desiredName}*\n
 Meu Whatsapp é *${this.props.bag.info.whatsapp}*\n

@@ -61,7 +61,7 @@ class CustomAppBar extends React.Component {
 	}
 
 	openWhatsapp() {
-		const url = `https://api.whatsapp.com/send?phone=05562993547056&text=Olá, tudo bem?`;
+		const url = `https://api.whatsapp.com/send?phone=05562983118355&text=Olá, tudo bem?`;
 		var encoded = encodeURI(url);
 		window.open(encoded, '_blank');
 	}
@@ -107,7 +107,7 @@ class CustomAppBar extends React.Component {
 							</ListItem>
 							<ListItem button key={4} onClick={this.openWhatsapp}>
 								<ListItemIcon><WhatsappIcon /></ListItemIcon>
-								<ListItemText primary={"(62) 9 9999-8888"} />
+								<ListItemText primary={"(62) 9 8311-8355"} />
 							</ListItem>
 						</List>
 					</Drawer>
