@@ -78,9 +78,9 @@ class CustomAppBar extends React.Component {
 					<Drawer anchor={'left'} open={Boolean(this.state.menuAnchor)} onClose={this.handleMenuClose}>
 						<Link href="#/" onClick={() => this.props.history.push("")}><img src='./assets/image/logo-256.png'/></Link>
 						<List>
-							<ListItem button key={0} onClick={() => this.handleMenuClick('/frete-gratis')}>
+							<ListItem button key={0} onClick={() => this.handleMenuClick('/entrega-gratis')}>
 								<ListItemIcon><LocalShippingIcon /></ListItemIcon>
-								<ListItemText primary={"Frete Grátis"} />
+								<ListItemText primary={"Entrega Grátis"} />
 							</ListItem>
 							<ListItem button key={1} onClick={() => this.handleMenuClick('/perguntas-frequentes')}>
 								<ListItemIcon><QuestionAnswerIcon /></ListItemIcon>

@@ -50,7 +50,7 @@ class FreeShipping extends React.Component {
 		const { classes } = this.props;
 		return <React.Fragment>
 			<Typography variant="h4" align='center' gutterBottom>
-				Frete Grátis
+				Entrega Grátis
 			</Typography>
 			<Typography variant="body1" align='center' gutterBottom>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nulla dui, cursus ut scelerisque at, vulputate eu dolor. Pellentesque imperdiet, quam vitae mattis vulputate, lacus urna lacinia eros, quis fermentum ligula mi id ante. Quisque nec molestie urna. Vivamus id ante a ante ultricies luctus a vitae orci. Cras pulvinar dapibus sodales.</p>

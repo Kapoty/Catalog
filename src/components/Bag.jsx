@@ -234,7 +234,7 @@ Os produtos que desejo são:\n\n`;
 									: ''}
 								</Typography>
 								<Typography className={classes.input}>
-									Para entender melhor nossas formas de entrega <Button onClick={() => this.props.history.push('/frete-gratis')}> clique aqui </Button>
+									Para entender melhor nossas formas de entrega <Button onClick={() => this.props.history.push('/entrega-gratis')}> clique aqui </Button>
 								</Typography>
 							</div>
 							<div className={classes.actionsContainer}>
