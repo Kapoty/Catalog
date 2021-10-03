@@ -21,7 +21,7 @@ const useStyles = (theme) => ({
 	},
 });
 
-class PrivacyPolicy extends React.Component {
+class AboutUs extends React.Component {
 
 	constructor(props) {
 		super(props);
@@ -63,4 +63,4 @@ class PrivacyPolicy extends React.Component {
 
 }
 
-export default withStyles(useStyles)(PrivacyPolicy)
+export default withStyles(useStyles)(AboutUs)

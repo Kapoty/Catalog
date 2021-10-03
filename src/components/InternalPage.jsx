@@ -12,6 +12,7 @@ import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfUse from './TermsOfUse';
 import AboutUs from './AboutUs'
 import FAQ from './FAQ'
+import FreeShipping from './FreeShipping'
 
 const useStyles = (theme) => ({
 	appBar: {
@@ -30,7 +31,7 @@ class InternalPage extends React.Component {
 
 	constructor(props) {
 		super(props);
-		this.pages = [{pathname: 'frete-gratis', name: 'Frete Grátis', component: null},
+		this.pages = [{pathname: 'frete-gratis', name: 'Frete Grátis', component: FreeShipping},
 					{pathname: 'perguntas-frequentes', name: 'Perguntas Frequentes', component: FAQ},
 					{pathname: 'quem-somos', name: 'Quem Somos', component: AboutUs},
 					{pathname: 'termos-de-uso', name: 'Termos de Uso', component: TermsOfUse},
