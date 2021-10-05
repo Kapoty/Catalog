@@ -33,8 +33,12 @@ const useStyles = (theme) => ({
 		transform: 'translate(-50%, -50%)',
 	},
 	grow: {
-    flexGrow: 1,
-  },
+    	flexGrow: 1,
+  	},
+  	cnpj: {
+  		marginTop: theme.spacing(2),
+  		marginBottom: theme.spacing(1),
+  	}
 });
 
 class CustomAppBar extends React.Component {
@@ -101,14 +105,16 @@ class CustomAppBar extends React.Component {
 						</List>
 						<Divider/>
 						<List>
-							<ListItem button key={4} onClick={() => window.open('https://www.instagram.com/belalilymf/', '_blank')}>
+							<ListItem button key={5} onClick={() => window.open('https://www.instagram.com/belalilymf/', '_blank')}>
 								<ListItemIcon><InstagramIcon /></ListItemIcon>
 								<ListItemText primary={"@belalilymf"} />
 							</ListItem>
-							<ListItem button key={4} onClick={this.openWhatsapp}>
+							<ListItem button key={6} onClick={this.openWhatsapp}>
 								<ListItemIcon><WhatsappIcon /></ListItemIcon>
 								<ListItemText primary={"(62) 9 8311-8355"} />
 							</ListItem>
+							<Divider/>
+							<Typography className={classes.cnpj} align="center" variant="subtitle2">CNPJ 43.572.921/0001-31</Typography>
 						</List>
 					</Drawer>
 					<img className={classes.logo} src='./assets/image/logo-texto.png' onClick={() => this.props.history.push('/')}/>
@@ -118,7 +124,7 @@ class CustomAppBar extends React.Component {
 					</IconButton>
 				</Toolbar>
 			</AppBar>
-			<Toolbar />
+			<Toolbar><img className={classes.logoImg} src='./assets/image/logo-small.png'/></Toolbar>
 		</React.Fragment>
 	}
 

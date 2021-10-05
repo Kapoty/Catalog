@@ -72,7 +72,9 @@ const paymentNames = {
 
 const shippingNames = {
 	'1': 'Gratuita',
-	'2': 'Uber Flash'
+	'2': 'Normal',
+	'3': 'Expressa',
+	'4': 'Uber Flash'
 }
 
 class Bag extends React.Component {
@@ -224,13 +226,16 @@ Os produtos que desejo são:\n\n`;
 										}}
 									>
 										<option aria-label="Selecione" value="" />
-										<option value={1}>{shippingNames['1']}</option>
-										<option value={2}>{shippingNames['2']}</option>
+										{Object.keys(shippingNames).map((s) => {
+											return <option value={s}>{shippingNames[s]}</option>
+										})}
 									</Select>
 								</FormControl>
 								<Typography className={classes.input}>
 									{this.state.shipping == 1 ? 'A entrega será por nossa conta, em um dia específico da semana (necessário consultar área de cobertura)'
-									: this.state.shipping == 2 ? 'A entrega será por sua conta, em um dia e horário de sua escolha (valores determinados pela Uber)'
+									: this.state.shipping == 2 ? 'A entrega será por sua conta, em até dois dias úteis'
+									: this.state.shipping == 3 ? 'A entrega será por sua conta, ainda hoje (válido somente para pedidos finalizados até às 15:00, em dias úteis)'
+									: this.state.shipping == 4 ? 'A entrega será por sua conta, em um dia útil e horário de sua escolha (valores determinados pela Uber)'
 									: ''}
 								</Typography>
 								<Typography className={classes.input}>
