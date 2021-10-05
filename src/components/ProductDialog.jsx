@@ -252,7 +252,7 @@ class ProductDialog extends React.Component {
 						</Typography>
 						<div className={classes.sizeOptions}>
 							{CatalogData.items[this.state.itemId].sizes.map((size, i) => (
-								<Chip className={classes.sizeChip} label={CatalogData.sizes[size.id].name} key={size.id} onClick={() => this.setSize(size.id)} color={this.state.size == i ? "primary" : 'default'} disabled={this.state.sizesQnt[i] == 0 ? true : false}/>))
+								<Chip className={classes.sizeChip} label={CatalogData.sizes[size.id].name} key={size.id} onClick={() => this.setSize(i)} color={this.state.size == i ? "primary" : 'default'} disabled={this.state.sizesQnt[i] == 0 ? true : false}/>))
 							}
 						</div>
 					</div>
