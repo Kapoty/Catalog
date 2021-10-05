@@ -83,7 +83,7 @@
 		},
 		"3":{
 			"id":"3",
-			"name":"Body Falso",
+			"name":"Cropped Falso",
 			"sizes":[
 				{
 					"id":"3",
@@ -94,7 +94,7 @@
 			"price":25,
 			"categories":[
 				"0",
-				"2"
+				"3"
 			],
 			"priority":3,
 			"desc":"Lorem Impsum Body"

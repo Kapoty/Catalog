@@ -66,6 +66,7 @@ class Catalog extends React.Component {
 
 	render() {
 		const { classes } = this.props;
+		let _categoryId = 0;
 		return <React.Fragment>
 			<Paper square>
 				<Tabs
@@ -80,14 +81,14 @@ class Catalog extends React.Component {
 					)}/>
 				</Tabs>
 			</Paper>
-			{Object.keys(CatalogData.categories).map((categoryId) => 
-				<div style={{display: this.state.tab == categoryId ? 'block' : 'none'}} key={categoryId}>
+			{Object.keys(CatalogData.categories).map((categoryId) => {return (CatalogData.categories[categoryId].visible) ?
+				<div style={{display: this.state.tab == _categoryId++ ? 'block' : 'none'}} key={categoryId}>
 					<div className={classes.products}>
 							{this.props.filteredCatalog.map((itemId, i) => {return (CatalogData.items[itemId].categories.includes(categoryId)) ?
 									<Product key={itemId} order={i} item={CatalogData.items[itemId]} history={this.props.history}/> : ''}
 							)}
 					</div>
-				</div>
+				</div> : ''}
 			)}
 		</React.Fragment>
 	}
