@@ -73,8 +73,7 @@ const paymentNames = {
 const shippingNames = {
 	'1': 'Gratuita',
 	'2': 'Normal',
-	'3': 'Expressa',
-	'4': 'Uber Flash'
+	'3': 'Expressa'
 }
 
 class Bag extends React.Component {
@@ -226,8 +225,8 @@ Os produtos que desejo são:\n\n`;
 										}}
 									>
 										<option aria-label="Selecione" value="" />
-										{Object.keys(shippingNames).map((s) => {
-											return <option value={s}>{shippingNames[s]}</option>
+										{Object.keys(shippingNames).map((s, i) => {
+											return <option value={s} key={i}>{shippingNames[s]}</option>
 										})}
 									</Select>
 								</FormControl>

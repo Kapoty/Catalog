@@ -2,16 +2,20 @@
 	"imagePath":"./assets/image/catalog/",
 	"categories":{
 		"0":{
-			"name":"Destaque"
+			"name":"Destaque",
+			"visible":1
 		},
 		"1":{
-			"name":"T-Shirt"
+			"name":"T-Shirt",
+			"visible":1
 		},
 		"2":{
-			"name":"Body"
+			"name":"Body",
+			"visible":0
 		},
 		"3":{
-			"name":"Cropped"
+			"name":"Cropped",
+			"visible":1
 		}
 	},
 	"sizes":{

@@ -75,8 +75,8 @@ class Catalog extends React.Component {
 				onChange={this.changeTab}
 				centered
 				>
-					{Object.keys(CatalogData.categories).map((categoryId) => 
-						<Tab label={CatalogData.categories[categoryId].name} key={categoryId}/>
+					{Object.keys(CatalogData.categories).map((categoryId) => {return (CatalogData.categories[categoryId].visible) ?
+						<Tab label={CatalogData.categories[categoryId].name} key={categoryId}/> : ''}
 					)}/>
 				</Tabs>
 			</Paper>

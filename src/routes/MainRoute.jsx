@@ -165,6 +165,7 @@ export default class MainRoute extends React.Component {
 		filteredCatalog.sort((a, b) => {
 			switch(order) {
 				case '1':
+					console.log(CatalogData.items[b].priority);
 					return CatalogData.items[b].priority - CatalogData.items[a].priority;
 				break;
 				case '2':
@@ -179,7 +180,6 @@ export default class MainRoute extends React.Component {
 				break;
 			}
 		});
-		console.log(JSON.stringify(filteredCatalog));
 		this.setState({filterDialogOpened: false, filter: {order: order, sizes: sizes}, filteredCatalog: filteredCatalog});
 	}
 

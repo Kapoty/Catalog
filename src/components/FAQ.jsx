@@ -26,14 +26,9 @@ const useStyles = (theme) => ({
 	},
 });
 
-const questions = [{q: `Qual o horário de atendimento?`, a: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-					sit amet blandit leo lobortis eget.`},
-					{q: `Quais os métodos de pagamento aceitos?`, a: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-					sit amet blandit leo lobortis eget.`},
-					{q: `Posso retirar na loja?`, a: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-					sit amet blandit leo lobortis eget.`},
-					{q: `Qual a política de devolução?`, a: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse malesuada lacus ex,
-					sit amet blandit leo lobortis eget.`},
+const questions = [{q: 'O que é um body?', a: `O Body, inicialmente chamado de Collant no Brasil, é uma peça de roupa que substitui as blusas tradicionais e leva um pouco da moda praia para o dia a dia. O body alonga a silhueta e realça as curvas, além de ser um traje versátil que combina com vários looks. É uma peça coringa no guarda roupa e combina com qualquer ocasião.`},
+	{q: 'O que é uma t-shirt?', a: `T-Shirt é um estilo de camiseta mais casual e despojado. É ótimo para montar um look mais jovial e confortável.`},
+	{q: 'O que é um cropped?', a: `O cropped é uma releitura moderna dos tradicionais tops. Ele é a escolha ideal para quem quer ousar. É uma peça chave para compor aquele look verão bem estiloso, lindo e confortável.`},
 					];
 
 function escapeRegex(string) {
@@ -80,7 +75,7 @@ class FAQ extends React.Component {
 						</AccordionSummary>
 						<AccordionDetails>
 							<Typography>
-							{q.a}
+								<div dangerouslySetInnerHTML={{ __html: q.a}}></div>
 							</Typography>
 						</AccordionDetails>
 					</Accordion> : ''

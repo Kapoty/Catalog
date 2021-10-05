@@ -23,6 +23,7 @@ import ScreenLockPortraitIcon from '@material-ui/icons/ScreenLockPortrait';
 import InstagramIcon from '@material-ui/icons/Instagram';
 import WhatsappIcon from '@material-ui/icons/Whatsapp';
 import Link from '@material-ui/core/Link';
+import AssignmentReturnIcon from '@material-ui/icons/AssignmentReturn';
 
 const useStyles = (theme) => ({
 	logo: {
@@ -86,19 +87,23 @@ class CustomAppBar extends React.Component {
 								<ListItemIcon><LocalShippingIcon /></ListItemIcon>
 								<ListItemText primary={"Entrega Grátis"} />
 							</ListItem>
-							<ListItem button key={1} onClick={() => this.handleMenuClick('/perguntas-frequentes')}>
+							<ListItem button key={1} onClick={() => this.handleMenuClick('/troca-devolucao')}>
+								<ListItemIcon><AssignmentReturnIcon /></ListItemIcon>
+								<ListItemText primary={"Troca/Devolução"} />
+							</ListItem>
+							<ListItem button key={2} onClick={() => this.handleMenuClick('/perguntas-frequentes')}>
 								<ListItemIcon><QuestionAnswerIcon /></ListItemIcon>
 								<ListItemText primary={"Perguntas Frequentes"} />
 							</ListItem>
-							<ListItem button key={2} onClick={() => this.handleMenuClick('/quem-somos')}>
+							<ListItem button key={3} onClick={() => this.handleMenuClick('/quem-somos')}>
 								<ListItemIcon><StoreIcon /></ListItemIcon>
 								<ListItemText primary={"Quem Somos"} />
 							</ListItem>
-							<ListItem button key={3} onClick={() => this.handleMenuClick('/termos-de-uso')}>
+							<ListItem button key={4} onClick={() => this.handleMenuClick('/termos-de-uso')}>
 								<ListItemIcon><AssignmentIcon /></ListItemIcon>
 								<ListItemText primary={"Termos de Uso"} />
 							</ListItem>
-							<ListItem button key={4} onClick={() => this.handleMenuClick('/politica-de-privacidade')}>
+							<ListItem button key={5} onClick={() => this.handleMenuClick('/politica-de-privacidade')}>
 								<ListItemIcon><ScreenLockPortraitIcon /></ListItemIcon>
 								<ListItemText primary={"Política de Privacidade"} />
 							</ListItem>

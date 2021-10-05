@@ -10,9 +10,10 @@ import CloseIcon from '@material-ui/icons/Close';
 import IconButton from '@material-ui/core/IconButton';
 import PrivacyPolicy from './PrivacyPolicy';
 import TermsOfUse from './TermsOfUse';
-import AboutUs from './AboutUs'
-import FAQ from './FAQ'
-import FreeShipping from './FreeShipping'
+import AboutUs from './AboutUs';
+import FAQ from './FAQ';
+import FreeShipping from './FreeShipping';
+import ReturnPolicy from './ReturnPolicy';
 
 const useStyles = (theme) => ({
 	appBar: {
@@ -33,6 +34,7 @@ class InternalPage extends React.Component {
 		super(props);
 		this.pages = [{pathname: 'entrega-gratis', name: 'Entrega Grátis', component: FreeShipping},
 					{pathname: 'perguntas-frequentes', name: 'Perguntas Frequentes', component: FAQ},
+					{pathname: 'troca-devolucao', name: 'Troca/Devolução', component: ReturnPolicy},
 					{pathname: 'quem-somos', name: 'Quem Somos', component: AboutUs},
 					{pathname: 'termos-de-uso', name: 'Termos de Uso', component: TermsOfUse},
 					{pathname: 'politica-de-privacidade', name: 'Política de Privacidade', component: PrivacyPolicy}];

@@ -73,7 +73,7 @@ class FreeShipping extends React.Component {
 			<Typography variant="body1" align='center' gutterBottom>
 				<p>Toda semana, na <b>quarta-feira</b>, é realizada a <b>entrega grátis</b> - uma série de entregas totalmente custeadas pela <b>Bela Lily</b>!</p>
 				<p>Sim, você não leu errado: nessa modalidade suas roupas chegam na sua casa (ou um outro local de sua escolha) <b>sem nenhum custo</b> de entrega para você!</p>
-				<p>Para que o seu pedido chegue na <b>quarta-feira mais próxima</b>, é preciso que ele seja realizado até a <b>terça-feira antecedente, às 20:00</b>. Caso seja feito após esse horário, a entrega grátis será realizada na quarta-feira seguinte.</p>
+				<p>Para que o seu pedido chegue na <b>quarta-feira mais próxima</b>, é preciso que ele seja realizado até a <b>terça-feira antecedente, às 20:00</b>. Caso seja feito após esse horário, a entrega grátis será realizada na quarta-feira da semana seguinte.</p>
 				<p>Por enquanto, essa modalidade é oferecida somente para alguns bairros de Goiânia, mas a Bela Lily está trabalhando para ampliar o seu alcance!</p>
 				<p>Confira no mapa a seguir os bairros contemplados:</p>
 			</Typography>
@@ -106,27 +106,6 @@ class FreeShipping extends React.Component {
 					<Typography>
 						<p>Nessa modalidade, a entrega será por sua conta, em até <b>dois dias úteis</b>.</p>
 						<p>O valor da entrega será calculado de acordo com a distância do local escolhido por você e o nosso centro de distribuição, conforme as seguintes regras:</p>
-						<p>Raio de 5 Km R$ 5,00<br/>
-							Raio de 10 km R$ 10,00<br/>
-							Raio de 11 km até qualquer região de Goiânia R$ 20,00<br/>
-							Aparecida de Goiânia R$ 30,00<br/>
-							Trindade R$ 30,00<br/>
-							Goianira R$ 35,00</p>
-					</Typography>
-				</AccordionDetails>
-			</Accordion>
-			<Accordion>
-				<AccordionSummary
-					expandIcon={<ExpandMoreIcon />}
-					aria-controls="panel1a-content"
-					id="panel1a-header"
-				>
-					<Typography className={classes.heading}>Entrega Expressa</Typography>
-				</AccordionSummary>
-				<AccordionDetails>
-					<Typography>
-					<p>Nessa modalidade, a entrega será por sua conta, <b>ainda hoje</b> (válido somente para pedidos finalizados até às 15:00, em dias úteis).</p>
-						<p>O valor da entrega será calculado de acordo com a distância do local escolhido por você e o nosso centro de distribuição, conforme as seguintes regras:</p>
 						<p>Raio de 5 Km R$ 2,00<br/>
 							Raio de 10 km R$ 5,00<br/>
 							Raio de 11 km até qualquer região de Goiânia R$ 10,00<br/>
@@ -142,6 +121,28 @@ class FreeShipping extends React.Component {
 					aria-controls="panel1a-content"
 					id="panel1a-header"
 				>
+					<Typography className={classes.heading}>Entrega Expressa</Typography>
+				</AccordionSummary>
+				<AccordionDetails>
+					<Typography>
+					<p>Nessa modalidade, a entrega será por sua conta, <b>ainda hoje</b> (válido somente para pedidos finalizados até às 15:00, em dias úteis).</p>
+						<p>O valor da entrega será calculado de acordo com a distância do local escolhido por você e o nosso centro de distribuição, conforme as seguintes regras:</p>
+						<p>Raio de 5 Km R$ 5,00<br/>
+							Raio de 10 km R$ 10,00<br/>
+							Raio de 11 km até qualquer região de Goiânia R$ 20,00<br/>
+							Aparecida de Goiânia R$ 30,00<br/>
+							Trindade R$ 30,00<br/>
+							Goianira R$ 35,00</p>
+					</Typography>
+				</AccordionDetails>
+			</Accordion>
+		</React.Fragment>
+		/*<Accordion>
+				<AccordionSummary
+					expandIcon={<ExpandMoreIcon />}
+					aria-controls="panel1a-content"
+					id="panel1a-header"
+				>
 					<Typography className={classes.heading}>Uber Flash</Typography>
 				</AccordionSummary>
 				<AccordionDetails>
@@ -150,8 +151,7 @@ class FreeShipping extends React.Component {
 						<p>Os valores dessa entrega serão determinados pela Uber.</p>
 					</Typography>
 				</AccordionDetails>
-			</Accordion>
-		</React.Fragment>
+			</Accordion>*/
 	}
 
 }
