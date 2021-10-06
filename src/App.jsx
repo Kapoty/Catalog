@@ -2,6 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 import MainRoute from "routes/MainRoute";
+import SoonRoute from "routes/SoonRoute";
 import { useHistory } from 'react-router';
 import 'assets/css/general.css';
 
@@ -14,7 +15,7 @@ class SiteRouter extends React.Component {
                <React.Fragment>
                		 <div id="app">
                		 	<Switch>
-                           <Route path="/" component={MainRoute} />
+                           <Route path="/" component={SoonRoute} />
                      	</Switch>
                      </div>
                </React.Fragment>
