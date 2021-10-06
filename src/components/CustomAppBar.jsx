@@ -110,9 +110,9 @@ class CustomAppBar extends React.Component {
 						</List>
 						<Divider/>
 						<List>
-							<ListItem button key={5} onClick={() => window.open('https://www.instagram.com/belalilymf/', '_blank')}>
+							<ListItem button key={5} onClick={() => window.open('https://www.instagram.com/belalily_mf/', '_blank')}>
 								<ListItemIcon><InstagramIcon /></ListItemIcon>
-								<ListItemText primary={"@belalilymf"} />
+								<ListItemText primary={"@belalily_mf"} />
 							</ListItem>
 							<ListItem button key={6} onClick={this.openWhatsapp}>
 								<ListItemIcon><WhatsappIcon /></ListItemIcon>
