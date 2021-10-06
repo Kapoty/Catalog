@@ -141,7 +141,7 @@ export default class MainRoute extends React.Component {
 	}
 
 	defaultSort() {
-		let items = Object.keys(CatalogData.items);
+		let items = Object.keys(CatalogData.items).filter((item) => CatalogData.items[item].visible);
 		items.sort((a, b) => {
 			return CatalogData.items[b].priority - CatalogData.items[a].priority;
 		});
@@ -150,7 +150,7 @@ export default class MainRoute extends React.Component {
 
 	setFilter(order, sizes) {
 		let filteredCatalog = [];
-		Object.keys(CatalogData.items).forEach((itemId) => {
+		Object.keys(CatalogData.items).filter((item) => CatalogData.items[item].visible).forEach((itemId) => {
 			let add = false;
 			if (sizes.length != 0) {
 				let itemSizes = CatalogData.items[itemId].sizes;
