@@ -18,6 +18,7 @@ import InternalPage from '../components/InternalPage';
 import ProductDialog from '../components/ProductDialog';
 import FilterDialog from '../components/FilterDialog';
 import CookiesDialog from '../components/CookiesDialog';
+import BlockedPopup from '../components/BlockedPopup';
 
 import * as ls from 'local-storage';
 
@@ -48,7 +49,7 @@ export default class MainRoute extends React.Component {
 			ls('bag', JSON.stringify(this.getCleanBag()));
 		this.state = {lastPage: '/', addedToBag: false, addedToBagInfo: {name: '', qnt: ''}, filterDialogOpened: false, filter: {order: 1, sizes: []},
 			cookiesDialogOpened: cookies.get('cookiesDialog') == undefined, filteredCatalog: this.defaultSort(),
-			bag: JSON.parse(ls('bag'))};
+			bag: JSON.parse(ls('bag')), blockedPopup: true, blockedPopupPass: '03213', blockedPopupPassTry: ''};
 		this.addToBag = this.addToBag.bind(this)
 		this.closeAddToBag = this.closeAddToBag.bind(this);
 		this.openFilter = this.openFilter.bind(this);
@@ -60,6 +61,7 @@ export default class MainRoute extends React.Component {
 		this.deleteItemFromBag = this.deleteItemFromBag.bind(this);
 		this.updateBagInfo = this.updateBagInfo.bind(this);
 		this.resetBag = this.resetBag.bind(this);
+		this.blockedClick = this.blockedClick.bind(this);
 	}
 
 	addToBag(itemId, size, qnt) {
@@ -192,12 +194,34 @@ export default class MainRoute extends React.Component {
 		this.setState({cookiesDialogOpened: false});
 	}
 
+	blockedClick(e) {
+		let x = e.clientX;
+		let y = e.clientY;
+		let wh = window.innerWidth;
+		let he = window.innerHeight;
+		if (x/wh <= 0.5) {
+			if (y/he <= 0.5)
+				this.state.blockedPopupPassTry += '0';
+			else
+				this.state.blockedPopupPassTry += '2';
+		} else {
+			if (y/he <= 0.5)
+				this.state.blockedPopupPassTry += '1';
+			else
+				this.state.blockedPopupPassTry += '3';
+		}
+		this.state.blockedPopupPassTry = this.state.blockedPopupPassTry.substr(Math.max(this.state.blockedPopupPassTry.length-5, 0), 5);
+		if (this.state.blockedPopupPassTry == this.state.blockedPopupPass)
+			this.setState({blockedPopup: false});
+	}
+
 	render() {
 		if (this.props.location.pathname == '/sacola' || this.props.location.pathname == '/')
 			this.state.lastPage = this.props.location.pathname ;
 
 		return <React.Fragment>
 			<ThemeProvider theme={theme}>
+				{(this.state.blockedPopup) ? <BlockedPopup blockedClick={this.blockedClick} /> : '' }
 				<CustomAppBar history={this.props.history} openFilter={this.openFilter}/>
 				<div style={{display: (this.state.lastPage!='/sacola') ? 'block' : 'none'}}>
 					<Catalog history={this.props.history} filteredCatalog={this.state.filteredCatalog}/>

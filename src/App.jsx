@@ -15,7 +15,7 @@ class SiteRouter extends React.Component {
                <React.Fragment>
                		 <div id="app">
                		 	<Switch>
-                           <Route path="/" component={SoonRoute} />
+                           <Route path="/" component={MainRoute} />
                      	</Switch>
                      </div>
                </React.Fragment>

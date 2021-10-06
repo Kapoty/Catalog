@@ -84,9 +84,9 @@ class FreeShipping extends React.Component {
 			<div className={classes.map}><img style={{width: '100%', maxWidth: '1024px'}}src='./assets/image/freeshipping/map1.png'/></div>
 			
 				<List dense className={classes.placesList}>
-					{places.map((p) => {
+					{places.map((p, i) => {
 						return <ListItem>
-							<ListItemText className={classes.placesListText} primary={p} />
+							<ListItemText key={i} className={classes.placesListText} primary={p} />
 						</ListItem>
 					})}
 				</List>
