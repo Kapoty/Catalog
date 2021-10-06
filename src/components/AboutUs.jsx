@@ -36,7 +36,9 @@ class AboutUs extends React.Component {
 				Quem Somos
 			</Typography>
 			<Typography variant="body1" align='center' gutterBottom>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent nulla dui, cursus ut scelerisque at, vulputate eu dolor. Pellentesque imperdiet, quam vitae mattis vulputate, lacus urna lacinia eros, quis fermentum ligula mi id ante. Quisque nec molestie urna. Vivamus id ante a ante ultricies luctus a vitae orci. Cras pulvinar dapibus sodales.</p>
+				<p>Somos a Bela Lily! Viemos ao mercado da moda para trazer à vocês os melhores produtos disponíveis e com o melhor preço possível. Nosso objetivo é entregar à vocês produtos de qualidade e de forma acessível, por isso oferecemos as melhores formas de pagamento e entrega.</p> 
+				<p>Desejamos que todas estejam sempre belas e nos colocamos à disposição para ajudá-las trazendo sempre os melhores looks.</p>
+				<p>Vem fazer parte desse projeto. Seja uma Lily, sempre bela!</p>
 			</Typography>
 			<Typography variant="h4" align='center' gutterBottom>
 				Missão
