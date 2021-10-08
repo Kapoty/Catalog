@@ -53,7 +53,7 @@ export default class MainRoute extends React.Component {
 		ls('bag', JSON.stringify(bag));
 		this.state = {lastPage: '/', addedToBag: false, addedToBagInfo: {name: '', qnt: ''}, filterDialogOpened: false, filter: {order: 1, sizes: []},
 			cookiesDialogOpened: cookies.get('cookiesDialog') == undefined, filteredCatalog: this.defaultSort(),
-			bag: bag, blockedPopup: true, blockedPopupPass: '03213', blockedPopupPassTry: '',
+			bag: bag, blockedPopup: false, blockedPopupPass: '03213', blockedPopupPassTry: '',
 			bagFixedDialogOpened: bagVerification.fixed};
 		this.addToBag = this.addToBag.bind(this)
 		this.closeAddToBag = this.closeAddToBag.bind(this);
