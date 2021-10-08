@@ -270,7 +270,7 @@ class ProductDialog extends React.Component {
 					<Divider variant='middle'/>
 					<div className={classes.descSection} ref={this.descSectionRef}>
 						<Typography gutterBottom>
-							{CatalogData.items[this.state.itemId].desc}
+							<span dangerouslySetInnerHTML={{ __html: CatalogData.items[this.state.itemId].desc}}></span>
 						</Typography>
 					</div>
 				</DialogContent>
@@ -290,7 +290,7 @@ class ProductDialog extends React.Component {
 							<CloseIcon />
 						</IconButton>
 					</DialogTitle>
-					<DialogContent dividers style={{display: 'flex', justifyContent: 'center'}}>
+					<DialogContent dividers style={{display: 'flex', justifyContent: 'space-between'}}>
 						<img src={this.state.image} alt={'title'} style={{height: '100%'}} onClick={() => this.openImage(img)}/>
 					</DialogContent>
 				</Dialog>
