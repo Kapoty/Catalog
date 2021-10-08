@@ -19,7 +19,7 @@ const useStyles = (theme) => ({
 		maxHeight: '100vw',
 		width: '100vh',
 		maxWidth: '100vw',
-		backgroundImage: 'url(./assets/image/soon.png)',
+		backgroundImage: 'url(./assets/image/soon.png?v=2)',
 		backgroundSize: 'cover',
 	},
 });
