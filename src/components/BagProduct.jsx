@@ -84,7 +84,7 @@ class BagProduct extends React.Component {
 					<CardMedia
 					className={classes.media}
 					image={`${CatalogData.imagePath}${this.props.item.itemId}/1-256.jpg`}
-					title="Contemplative Reptile"
+					title={CatalogData.items[this.props.item.itemId].name}
 					/>
 					<CardContent>
 						<Typography gutterBottom variant="h6" component="p" align="center">

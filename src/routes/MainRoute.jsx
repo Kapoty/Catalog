@@ -19,6 +19,7 @@ import ProductDialog from '../components/ProductDialog';
 import FilterDialog from '../components/FilterDialog';
 import CookiesDialog from '../components/CookiesDialog';
 import BlockedPopup from '../components/BlockedPopup';
+import BagFixedDialog from '../components/BagFixedDialog';
 
 import * as ls from 'local-storage';
 
@@ -47,9 +48,13 @@ export default class MainRoute extends React.Component {
 		super(props);
 		if (ls('bag') == undefined)
 			ls('bag', JSON.stringify(this.getCleanBag()));
+		let bagVerification = this.verifyAndFixBag(JSON.parse(ls('bag')));
+		let bag = bagVerification.bag;
+		ls('bag', JSON.stringify(bag));
 		this.state = {lastPage: '/', addedToBag: false, addedToBagInfo: {name: '', qnt: ''}, filterDialogOpened: false, filter: {order: 1, sizes: []},
 			cookiesDialogOpened: cookies.get('cookiesDialog') == undefined, filteredCatalog: this.defaultSort(),
-			bag: JSON.parse(ls('bag')), blockedPopup: true, blockedPopupPass: '03213', blockedPopupPassTry: ''};
+			bag: bag, blockedPopup: true, blockedPopupPass: '03213', blockedPopupPassTry: '',
+			bagFixedDialogOpened: bagVerification.fixed};
 		this.addToBag = this.addToBag.bind(this)
 		this.closeAddToBag = this.closeAddToBag.bind(this);
 		this.openFilter = this.openFilter.bind(this);
@@ -62,6 +67,19 @@ export default class MainRoute extends React.Component {
 		this.updateBagInfo = this.updateBagInfo.bind(this);
 		this.resetBag = this.resetBag.bind(this);
 		this.blockedClick = this.blockedClick.bind(this);
+		this.closeBagFixedDialog = this.closeBagFixedDialog.bind(this);
+	}
+
+	verifyAndFixBag(bag) {
+		let fixed = false;
+		bag.items.forEach((item) => {
+			let qnt = item.qnt;
+			item.qnt = Math.min(item.qnt, CatalogData.items[item.itemId].sizes[item.size].qnt);
+			if (qnt != item.qnt)
+				fixed = true;
+		});
+		bag.items = bag.items.filter((item) => item.qnt > 0);
+		return {bag: bag, fixed: fixed};
 	}
 
 	addToBag(itemId, size, qnt) {
@@ -194,6 +212,10 @@ export default class MainRoute extends React.Component {
 		this.setState({cookiesDialogOpened: false});
 	}
 
+	closeBagFixedDialog() {
+		this.setState({bagFixedDialogOpened: false});
+	}
+
 	blockedClick(e) {
 		let x = e.clientX;
 		let y = e.clientY;
@@ -241,6 +263,7 @@ export default class MainRoute extends React.Component {
 					message={`${this.state.addedToBagInfo.qnt}x ${this.state.addedToBagInfo.name} ${(this.state.addedToBagInfo.qnt == 1)?'foi adicionada':'foram adicionadas'} à sua sacola!`}
 				/>
 				<CookiesDialog open={this.state.cookiesDialogOpened} history={this.props.history} closeCookiesDialog={this.closeCookiesDialog}/>
+				<BagFixedDialog open={this.state.bagFixedDialogOpened} closeBagFixedDialog={this.closeBagFixedDialog}/>
 			</ThemeProvider>
 		</React.Fragment>
 	}
