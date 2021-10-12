@@ -102,6 +102,9 @@ const useStyles = (theme) => ({
 	descSection: {
 		margin: theme.spacing(3, 2),
 	},
+	availabilitySection: {
+		margin: theme.spacing(3, 2),
+	}
 });
 
 const Transition = React.forwardRef(function Transition(props, ref) {
@@ -266,6 +269,11 @@ class ProductDialog extends React.Component {
 						<IconButton aria-label="close" onClick={this.addQnt} disabled={this.state.qnt >= this.state.sizesQnt[this.state.size]}>
 							<AddCircleIcon />
 						</IconButton>
+					</div>
+					<div className={classes.availabilitySection}>
+						<Typography variant="body2" color="primary" component="p" align="center">
+							*Confirmar disponibilidade com o atendente
+						</Typography>
 					</div>
 					<Divider variant='middle'/>
 					<div className={classes.descSection} ref={this.descSectionRef}>

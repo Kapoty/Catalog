@@ -2,3 +2,55 @@ body {
 	margin: 0;
 	padding: 0;
 }
+
+#onError {
+	display: none;
+	background-color: #f26389;
+	width: 100vw;
+	min-height: 100vh;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#onError .logo {
+}
+
+#onError .content, #onError .copyButton {
+	font-size: 1.25rem;
+	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+    color: white;
+    max-width: 80vw;
+    word-wrap: break-word;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#onError .errorMessage {
+	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+	width: 80vw;
+	text-align: center;
+	resize: none;
+	padding: 10px;
+	margin-bottom: 20px;
+}
+
+#onError .messageCopied {
+	color: white; display: none; margin-bottom: 20px;font-size: 1.25rem;
+	font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.0075em;
+}
+
+#onError a {
+	color: #f26389 !important;
+	background-color: white;
+	border-radius: 5px;
+	padding: 5px;
+	line-height: 40px;
+	text-decoration: none; /* no underline */
+}

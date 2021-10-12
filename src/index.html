@@ -23,12 +23,36 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="onError" style="display: none">
+    	<img class="logo" src='./assets/image/logo-256.png'/>
+    	<div class="content">
+	    	Oh não, ocorreu um imprevisto :(<br/>
+	    	Experimente recarregar a página.<br/><br/>
+	    	Caso isso não resolva, não se preocupe, entre em contato conosco através do<br/><br/>
+	    	<a href="https://api.whatsapp.com/send?phone=05562983118355&text=Ol%C3%A1,%20tudo%20bem?" target="_blank">Whatsapp (62) 9 8311-8355</a><br/>
+	    	ou<br/>
+	    	<a href="https://www.instagram.com/belalily_mf/" target="_blank">Instagram @belalily_mf</a><br/><br/>
+	    	Se possível, nos envie a mensagem de erro abaixo, para que possamos soluciona-lo:<br/>
+    	</div>
+    	<span class="messageCopied">Mensagem copiada!</span>
+    	<textarea readonly class="errorMessage"></textarea>
+    	<a href="#" class="copyButton">Copiar tudo</a>
+    </div>
     <script type="text/javascript">
       window.onerror = function (message, url, lineNo) {
       		localStorage.clear();
+      		document.getElementById("onError").style.display = 'flex';
+      		document.querySelector("#onError .errorMessage").value = 'Error: ' + message + '\n' + 'Line Number: ' + lineNo;
           //alert('Error: ' + message + '\n' + 'Line Number: ' + lineNo);
           return true;
       }
+
+      document.querySelector("#onError .copyButton").addEventListener('click', () => {
+      	document.querySelector('#onError .errorMessage').select();
+      	document.querySelector('#onError .errorMessage').focus();
+      	document.execCommand('copy');
+      	document.querySelector('#onError .messageCopied').style.display = 'block';
+      });
     </script>
   </body>
 </html>
