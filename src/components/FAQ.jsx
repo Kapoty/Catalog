@@ -41,7 +41,7 @@ Bela Lily tem como significado a pureza da beleza.`},
 	{q: 'Como comprar mais barato?', a:`A Bela Lily está sempre garantindo qualidade e preço baixo em um só produto! Mas como uma garota Lily esperta que você é, estará sempre nos acompanhando para aproveitar nossos mega descontos mensais. Todos os meses preparamos diversas campanhas pensadas especialmente para vocês aproveitarem para se presentear e presentear quem amam. Fiquem ligadas nos nossos stories e ativem as notificações do Instagram para acessar em primeira mão as promoções que postamos em nosso feed! `},
 	{q: 'Como é feito as embalagens?', a:`Os materiais que compõem as embalagens são comprados dos nossos excelentes fornecedores. Após chegar a nossa loja, eles são esterilizados e preparados para receber nossos produtos. Quando o seu pedido chega até nós, nossa equipe o separa e prepara com carinho para que ele chegue de forma segura e confiável até você.`},
 	{q: 'Qual a localização do CD?', a:`1° Rua Barão de Mauá, n° 899<br/>
-Bloco 10, Apartamento 402, Condomínio Morada Goiá I<br/>
+Condomínio Morada Goiá I<br/>
 CEP: 74485-030`},
 ];
 
