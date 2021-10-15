@@ -34,7 +34,7 @@ Bela Lily tem como significado a pureza da beleza.`},
 	/*{q: 'O que é um body?', a: `O Body, inicialmente chamado de Collant no Brasil, é uma peça de roupa que substitui as blusas tradicionais e leva um pouco da moda praia para o dia a dia. O body alonga a silhueta e realça as curvas, além de ser um traje versátil que combina com vários looks. É uma peça coringa no guarda roupa e combina com qualquer ocasião.`},*/
 	{q: 'O que é uma t-shirt?', a: `T-Shirt é um estilo de camiseta mais casual e despojado. É ótimo para montar um look mais jovial e confortável.`},
 	{q: 'O que é um cropped?', a: `O cropped é uma releitura moderna dos tradicionais tops. Ele é a escolha ideal para quem quer ousar. É uma peça chave para compor aquele look verão bem estiloso, lindo e confortável.`},
-	{q: 'Quais os tamanhos disponíveis?', a:`Para Bodys e T-Shirts: P, M e G<br/>Croppeds: Tamanho Único`},
+	{q: 'Quais os tamanhos disponíveis?', a:`T-Shirts: P, M e G<br/>Croppeds: Tamanho Único`},
 	{q: 'Como faço para entrar em contato?', a:`Para entrar em contato conosco você pode nos enviar uma mensagem via direct pelo nosso instagram (@belalily_mf) ou via whatsapp pelo nosso número de contato (62) 9 8331-8355 (não atendemos chamadas).`},
 	{q: 'Como faço para comprar?', a:`Para comprar, basta acessar o nosso catálogo pelo link www.belalily.com.br e adicionar suas peças favoritas a sua sacola de compra e após responder nossas perguntinhas sobre qual a melhor forma de pagamento e melhor dia e horário para receber o seu produto, você será redirecionado para o nosso contato oficial do whatsapp (62) 9 8331-9355 e finalizaremos o seu atendimento.
 `},
