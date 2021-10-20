@@ -30,7 +30,7 @@ const questions = [{q: 'O que significa Bela Lily?', a: `Bela Lily é aquela de 
 Bela Lily tem como significado a pureza da beleza.`},
 	{q: 'Onde atuam?', a: `Atualmente atuamos em Goiânia e em algumas regiões metropolitanas. `},
 	{q: 'Qual horário de funcionamento?', a: `Nosso horário de funcionamento é de segunda a sexta das 8h às 20h e aos sábados das 8h às 14h. Não realizamos registro de pedidos aos domingos.`},
-	{q: 'Quais produtos vocês vendem?', a: `Por enquanto trabalhamos com T-Shirts e Croppeds, mas estamos trabalhando para estar sempre trazendo novidades para nossas lindas clientes.`},
+	{q: 'Quais produtos vocês vendem?', a: `Por enquanto oferecemos T-Shirts e Croppeds, mas estamos trabalhando para estar sempre trazendo novidades para nossas lindas clientes.`},
 	/*{q: 'O que é um body?', a: `O Body, inicialmente chamado de Collant no Brasil, é uma peça de roupa que substitui as blusas tradicionais e leva um pouco da moda praia para o dia a dia. O body alonga a silhueta e realça as curvas, além de ser um traje versátil que combina com vários looks. É uma peça coringa no guarda roupa e combina com qualquer ocasião.`},*/
 	{q: 'O que é uma t-shirt?', a: `T-Shirt é um estilo de camiseta mais casual e despojado. É ótimo para montar um look mais jovial e confortável.`},
 	{q: 'O que é um cropped?', a: `O cropped é uma releitura moderna dos tradicionais tops. Ele é a escolha ideal para quem quer ousar. É uma peça chave para compor aquele look verão bem estiloso, lindo e confortável.`},
