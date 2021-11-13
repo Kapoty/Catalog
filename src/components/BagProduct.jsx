@@ -30,6 +30,7 @@ const useStyles = (theme) => ({
 		display: 'flex',
 		flexDirecton: 'row',
 		flexWrap: 'wrap',
+		alignItems: 'flex-start',
 	},
 	media: {
 		[theme.breakpoints.down('sm')]: {
